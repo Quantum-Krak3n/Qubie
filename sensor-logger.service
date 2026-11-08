@@ -24,8 +24,8 @@ TimeoutStopSec=15
 StandardOutput=journal
 StandardError=journal
 
-# Without this, Python buffers print() output and the journal
-# lags behind or loses the last lines before a crash.
+# else python buffers print() output and journal
+# lags behind / loses the last lines before a crash.
 Environment=PYTHONUNBUFFERED=1
 
 [Install]
