@@ -1,0 +1,32 @@
+
+[Unit]
+Description=Raspberry Pi Offline Sensor Logger
+After=local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=simple
+
+User=pi
+Group=pi
+
+WorkingDirectory=/home/pi/sensor_logger
+
+ExecStart=/home/pi/sensor_logger/venv/bin/python /home/pi/sensor_logger/sensor_logger.py
+
+Restart=always
+RestartSec=5
+
+# Allow the service to shut down cleanly.
+TimeoutStopSec=15
+
+# Send print statements to the system journal.
+StandardOutput=journal
+StandardError=journal
+
+# Without this, Python buffers print() output and the journal
+# lags behind or loses the last lines before a crash.
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
